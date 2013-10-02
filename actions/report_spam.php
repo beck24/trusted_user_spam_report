@@ -4,7 +4,7 @@ $user = elgg_get_logged_in_user_entity();
 $object = get_entity(get_input('guid'));
 $forward = REFERER;
 
-if (!elgg_instanceof($object) || !community_spam_is_trusted_user($user)) {
+if (!elgg_instanceof($object) || !trusted_users_is_trusted($user)) {
 	register_error(elgg_echo('tu_spam_report:error:permissions'));
 	forward(REFERER);
 }
