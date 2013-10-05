@@ -75,3 +75,38 @@ function tu_spam_report_river_menu($hook, $type, $return, $params) {
 	
 	return $return;
 }
+
+
+/**
+ * add 'not spammer' and 'delete' links to entity menuy of listed spammers
+ * 
+ * @param type $hook
+ * @param type $type
+ * @param type $return
+ * @param type $params
+ */
+function tu_spam_report_spammer_menu($hook, $type, $return, $params) {
+	if (!elgg_instanceof($params['entity'], 'user') || elgg_get_context() != 'reported_spammers') {
+		return $return;
+	}
+	
+	// delete (requires new action due to it being deactivated)
+	$href = elgg_add_action_tokens_to_url('action/reported_spam/delete?guid=' . $params['entity']->guid);
+	$delete = new ElggMenuItem('delete', elgg_view_icon('delete'), $href);
+	$delete->setLinkClass('elgg-requires-confirmation');
+	
+	// unspam - will unmark this as spam and reactivate it
+	$href = elgg_add_action_tokens_to_url('action/reported_spam/notspammer?guid=' . $params['entity']->guid);
+	$unspam = new ElggMenuItem('unspam', elgg_echo('tu_spam_report:notspammer'), $href);
+	$unspam->setLinkClass('elgg-requires-confirmation');
+	
+	$metadata = elgg_get_metadata(array('guid' => $params['entity']->guid, 'metadata_name' => 'disable_reason', 'metadata_value' => 'content_marked_spam', 'limit' => false));
+	$href = false;
+	$reported = new ElggMenuItem('reported', elgg_echo('tu_spam_report:reported', array(date('m/d/Y', $metadata[0]->time_created))), $href);
+	
+	$return[] = $reported;
+	$return[] = $unspam;
+	$return[] = $delete;
+	
+	return $return;
+}

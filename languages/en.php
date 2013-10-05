@@ -1,6 +1,9 @@
 <?php
 
 $en = array(
+	'admin:users:spammers' => 'Reported Spammers',
+	'admin:administer_utilities:reported_spam' => "Reported Spam",
+	'tu_spam_report:spammers:noresults' => "No spammers to list",
 	'tu_spam_report:entity:deleted' => 'Entity has been deleted',
 	'tu_spam_report:entity:notspam' => 'Entity has had spam reports cleared',
 	'tu_spam_report:error:permissions' => "You don't have permission to do that",
@@ -9,6 +12,9 @@ $en = array(
 	'tu_spam_report:noresults' => "No spam to list",
 	'tu_spam_report:mark' => 'Mark as spam',
 	'tu_spam_report:notspam' => "Not Spam",
+	'tu_spam_report:notspammer' => "Not Spammer",
+	'tu_spam_report:user:notspammer' => "User has been marked as not a spammer",
+	'tu_spam_report:reported' => "Reported: %s",
 	'tu_spam_report:reportedby' => "Reported by: %s",
 	'tu_spam_report:settings' => "Spam Report Settings",
 	'tu_spam_report:trusted_users:flag_count' => "How many reports required to disable the content?",

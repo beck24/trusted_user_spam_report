@@ -4,19 +4,23 @@ require_once 'lib/hooks.php';
 
 elgg_register_event_handler('init', 'system', 'tu_spam_report_init');
 
-function tu_spam_report_init() {
-	// add spam report buttons to entity menus
-	elgg_register_plugin_hook_handler('register', 'menu:entity', 'tu_spam_report_entity_menu');
-	// run last to create a specific menu for admin
-	elgg_register_plugin_hook_handler('register', 'menu:entity', 'tu_spam_report_reported_spam_menu', 1000);
-	elgg_register_plugin_hook_handler('register', 'menu:river', 'tu_spam_report_river_menu');
-	
+function tu_spam_report_init() {	
 	
 	if (trusted_users_is_trusted(elgg_get_logged_in_user_entity())) {
+		// add spam report buttons to entity menus
+		elgg_register_plugin_hook_handler('register', 'menu:entity', 'tu_spam_report_entity_menu');
+		// run last to create a specific menu for admin
+		elgg_register_plugin_hook_handler('register', 'menu:entity', 'tu_spam_report_reported_spam_menu', 1000);
+		elgg_register_plugin_hook_handler('register', 'menu:river', 'tu_spam_report_river_menu');
+		elgg_register_plugin_hook_handler('register', 'menu:entity', 'tu_spam_report_spammer_menu');
+		
 		elgg_register_action('report_spam', dirname(__FILE__) . '/actions/report_spam.php');
 		elgg_register_action('reported_spam/delete', dirname(__FILE__) . '/actions/delete.php', 'admin');
 		elgg_register_action('reported_spam/notspam', dirname(__FILE__) . '/actions/notspam.php', 'admin');
+		elgg_register_action('reported_spam/notspammer', dirname(__FILE__) . '/actions/notspammer.php', 'admin');
+		
 		elgg_register_admin_menu_item('administer', 'reported_spam', 'administer_utilities');
+		elgg_register_admin_menu_item('administer', 'spammers', 'users');
 	}
 }
 

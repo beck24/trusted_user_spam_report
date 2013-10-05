@@ -24,7 +24,7 @@ if ($entity) {
 	// if the user was banned for this lets unban them
 	$time_lower = strtotime($user_strtotime);
 	
-	if ($owner->isBanned() && $time_lower && $userlimit) {
+	if (!$owner->isEnabled() && $time_lower && $userlimit) {
 		$usercount = elgg_get_annotations(array(
 			'guid' => $owner->guid,
 			'annotation_names' => array('content_marked_spam'),
@@ -34,7 +34,7 @@ if ($entity) {
 		));
 		
 		if ($usercount < $userlimit) {
-			$owner->unban();
+			$owner->enable();
 		}
 	}	
 }

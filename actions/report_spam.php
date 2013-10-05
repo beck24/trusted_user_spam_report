@@ -33,7 +33,7 @@ $marklimit = elgg_get_plugin_setting('trusted_users_flag_count', 'trusted_user_s
 $userlimit = elgg_get_plugin_setting('user_spam_count', 'trusted_user_spam_report');
 $user_strtotime = elgg_get_plugin_setting('user_spam_strtotime', 'trusted_user_spam_report');
 
-if ($markcount >= $marklimit) {
+if ($marklimit && ($markcount >= $marklimit)) {
 	// this is enough to call it spam
 	$object->disable('reported spam');
 	$forward = 'activity';
@@ -54,7 +54,7 @@ if ($markcount >= $marklimit) {
 		));
 		
 		if ($usercount >= $userlimit && !$owner->isAdmin()) {
-			$owner->ban('content_marked_spam');
+			$owner->disable('content_marked_spam');
 		}
 	}	
 }
