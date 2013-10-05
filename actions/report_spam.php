@@ -53,7 +53,7 @@ if ($markcount >= $marklimit) {
 			'count' => true
 		));
 		
-		if ($usercount >= $userlimit) {
+		if ($usercount >= $userlimit && !$owner->isAdmin()) {
 			$owner->ban('content_marked_spam');
 		}
 	}	
