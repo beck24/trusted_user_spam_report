@@ -20,10 +20,11 @@ function tu_spam_report_entity_menu($hook, $type, $return, $params) {
 	}
 	
 	// we're a trusted user, give us a spam link
-	$text = elgg_view_icon('attention');
+	$text = elgg_echo('tu_spam_report:mark'); //elgg_view_icon('attention');
 	$href = elgg_add_action_tokens_to_url('action/report_spam?guid=' . $params['entity']->guid);
 	$item = new ElggMenuItem('report_spam', $text, $href);
 	$item->setTooltip(elgg_echo('tu_spam_report:mark'));
+	$item->icon = elgg_view_icon('attention');
 	
 	$return[] = $item;
 	

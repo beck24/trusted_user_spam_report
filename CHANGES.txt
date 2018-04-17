@@ -2,6 +2,9 @@
 
 x.x (mm/dd/yyyy):
 
+2.0 (04/16/2018):
+ - upgrade for Elgg 3
+
 1.1 (10/04/2013):
  - change method of dealing with spammers from banning to disabling to remove them from feeds
  - add spammer listing page for admins
